@@ -11,29 +11,21 @@ public class Main {
         GameProgress gp1 = new GameProgress(100, 3, 80, 15.5);
         GameProgress gp2 = new GameProgress(50, 2, 15, 10.3);
         GameProgress gp3 = new GameProgress(30, 5, 120, 43.1);
-        String path = "/Users/Sydarrr/Desktop/testHW/Games/savegames/saves.txt";
-        File file = new File(path);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        String path = "/Users/Sydarrr/Desktop/testHW/Games/savegames";
+        String fileName = "saves";
+        String zipName = "saves";
 
-        gp1.saveGame(path);
+        gp1.saveGame(path, fileName+"gp1.txt");
+        gp2.saveGame(path, fileName+"gp2.txt");
+        gp3.saveGame(path, fileName+"gp3.txt");
 
-        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream("/Users/Sydarrr/Desktop/testHW/Games/savegames/saves.zip"))){
-            ZipEntry ze = new ZipEntry("saves.txt");
-            zout.putNextEntry(ze);
-            FileInputStream fis = new FileInputStream("/Users/Sydarrr/Desktop/testHW/Games/savegames/saves.txt");
-            byte[] buffer = new byte[fis.available()];
-            fis.read(buffer);
-            zout.write(buffer);
-            zout.closeEntry();
-            file.delete();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        gp1.zipFile(path, fileName+"gp1.txt", zipName);
+        gp2.zipFile(path, fileName+"gp2.txt", zipName);
+        gp3.zipFile(path, fileName+"gp3.txt", zipName);
+        gp1.deleteFile(path, fileName+"gp1.txt");
+        gp2.deleteFile(path, fileName+"gp2.txt");
+        gp3.deleteFile(path, fileName+"gp3.txt");
+        //распаковка прогресса (задание 3)
+        gp1.unZip(path, zipName);
     }
 }
