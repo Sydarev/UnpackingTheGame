@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -14,14 +15,16 @@ public class Main {
         String path = "/Users/Sydarrr/Desktop/testHW/Games/savegames";
         String fileName = "saves";
         String zipName = "saves";
+        String[] saves = new String[3];
 
         gp1.saveGame(path, fileName+"gp1.txt");
+        saves[0] = fileName+"gp1.txt";
         gp2.saveGame(path, fileName+"gp2.txt");
+        saves[1] = fileName+"gp2.txt";
         gp3.saveGame(path, fileName+"gp3.txt");
+        saves[2] = fileName+"gp3.txt";
 
-        gp1.zipFile(path, fileName+"gp1.txt", zipName);
-        gp2.zipFile(path, fileName+"gp2.txt", zipName);
-        gp3.zipFile(path, fileName+"gp3.txt", zipName);
+        gp1.zipFile(path, saves, zipName);
         gp1.deleteFile(path, fileName+"gp1.txt");
         gp2.deleteFile(path, fileName+"gp2.txt");
         gp3.deleteFile(path, fileName+"gp3.txt");
